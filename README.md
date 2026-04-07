@@ -102,8 +102,33 @@ A continuación se muestran los resultados de los tests:
 #### Código desarrollado
 
 ```python
+   class Vector:
+    def __init__(self, elementos):
+        self.elementos = [float(x) for x in elementos]
+
+    def __repr__(self):
+        return f"Vector({self.elementos})"
+
+    def __len__(self):
+        return len(self.elementos)
+
+    def __add__(self, otro):
+        return Vector([a + b for a, b in zip(self.elementos, otro.elementos)])
+
+    def __sub__(self, otro):
+        return Vector([a - b for a, b in zip(self.elementos, otro.elementos)])
+
     def __mul__(self, otro):
+        """
+        >>> v1 = Vector([1, 2, 3])
+        >>> v1 * 2
+        Vector([2.0, 4.0, 6.0])
+        >>> v2 = Vector([4, 5, 6])
+        >>> v1 * v2
+        Vector([4.0, 10.0, 18.0])
+        """
         if isinstance(otro, (int, float)):
+            # Aquí estaba el error, usamos 'otro' que es el número
             return Vector([otro * x for x in self.elementos])
         return Vector([a * b for a, b in zip(self.elementos, otro.elementos)])
 
@@ -111,14 +136,36 @@ A continuación se muestran los resultados de los tests:
         return self.__mul__(otro)
 
     def __matmul__(self, otro):
+        """
+        >>> v1 = Vector([1, 2, 3])
+        >>> v2 = Vector([4, 5, 6])
+        >>> v1 @ v2
+        32.0
+        """
         return sum(a * b for a, b in zip(self.elementos, otro.elementos))
 
     def __floordiv__(self, otro):
+        """
+        >>> v1 = Vector([2, 1, 2])
+        >>> v2 = Vector([0.5, 1, 0.5])
+        >>> v1 // v2
+        Vector([1.0, 2.0, 1.0])
+        """
         factor = (self @ otro) / (otro @ otro)
         return otro * factor
 
     def __mod__(self, otro):
+        """
+        >>> v1 = Vector([2, 1, 2])
+        >>> v2 = Vector([0.5, 1, 0.5])
+        >>> v1 % v2
+        Vector([1.0, -1.0, 1.0])
+        """
         return self - (self // otro)
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod(verbose=True)
 
 #### Subida del resultado al repositorio GitHub y *pull-request*
 
