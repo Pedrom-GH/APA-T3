@@ -5,7 +5,7 @@
 > [!Important]
 > Introduzca a continuación su nombre y apellidos:
 >
-> Fulano Mengano Zutano
+> Pedro Muñoz Alvarez
 
 ## Aviso Importante
 
@@ -92,9 +92,12 @@ $v_2$, y $v_1^\perp$ es normal (perpendicular) a $v_2$.
 
 #### Ejecución de los tests unitarios
 
-Inserte a continuación una captura de pantalla que muestre el resultado de ejecutar el
-fichero `algebra/vectores.py` con la opción *verbosa*, de manera que se muestre el
-resultado de la ejecución de los tests unitarios.
+### Ejecución de los tests unitarios
+
+A continuación se muestran los resultados de los tests:
+
+![Parte 1](./test1.png)
+![Parte 2](./test2.png)
 
 #### Código desarrollado
 
