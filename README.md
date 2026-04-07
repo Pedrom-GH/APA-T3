@@ -101,9 +101,24 @@ A continuación se muestran los resultados de los tests:
 
 #### Código desarrollado
 
-Inserte a continuación el código de los métodos desarrollados en esta tarea, usando los
-comandos necesarios para que se realice el realce sintáctico en Python del mismo (no
-vale insertar una imagen o una captura de pantalla, debe hacerse en formato *markdown*).
+```python
+    def __mul__(self, otro):
+        if isinstance(otro, (int, float)):
+            return Vector([otro * x for x in self.elementos])
+        return Vector([a * b for a, b in zip(self.elementos, otro.elementos)])
+
+    def __rmul__(self, otro):
+        return self.__mul__(otro)
+
+    def __matmul__(self, otro):
+        return sum(a * b for a, b in zip(self.elementos, otro.elementos))
+
+    def __floordiv__(self, otro):
+        factor = (self @ otro) / (otro @ otro)
+        return otro * factor
+
+    def __mod__(self, otro):
+        return self - (self // otro)
 
 #### Subida del resultado al repositorio GitHub y *pull-request*
 
